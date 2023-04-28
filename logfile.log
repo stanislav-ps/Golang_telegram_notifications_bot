@@ -60,3 +60,14 @@ INFO: 2023/04/28 20:49:02 start_handler.go:11: Received /start command
 INFO: 2023/04/28 20:49:02 main.go:57: [StanislavPS123] /start
 INFO: 2023/04/28 20:49:06 main.go:57: [StanislavPS123] /create_notification
 INFO: 2023/04/28 20:49:10 main.go:57: [StanislavPS123] /edit_notification
+INFO: 2023/04/28 22:39:42 main.go:25: Authorized on account stepik_sandbox_bot
+INFO: 2023/04/28 22:40:07 start_handler.go:11: Received /start command
+INFO: 2023/04/28 22:40:07 main.go:57: [StanislavPS123] /start
+INFO: 2023/04/28 22:40:10 create_notification_handler.go:13: Received /create_notification command
+INFO: 2023/04/28 22:47:27 main.go:25: Authorized on account stepik_sandbox_bot
+INFO: 2023/04/28 22:47:32 create_notification_handler.go:13: Received /create_notification command
+INFO: 2023/04/28 22:47:51 main.go:57: [StanislavPS123] /create_notification
+INFO: 2023/04/28 22:51:46 start_handler.go:11: Received /start command
+INFO: 2023/04/28 22:51:46 main.go:57: [StanislavPS123] /start
+INFO: 2023/04/28 22:51:51 list_handler.go:11: Received /list command
+INFO: 2023/04/28 22:51:51 main.go:57: [StanislavPS123] /list_notification
