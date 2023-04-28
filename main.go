@@ -1,8 +1,8 @@
 package main
 
 import (
-	"log"
 	"obit_bot/routes"
+	"obit_bot/utils"
 	"os"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
@@ -12,17 +12,17 @@ import (
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		utils.ErrorLogger.Fatal("Error loading .env file")
 	}
 
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("BOT_TOKEN"))
 	if err != nil {
-		log.Fatal(err)
+		utils.ErrorLogger.Fatal(err)
 	}
 
 	bot.Debug = true
 
-	log.Printf("Authorized on account %s", bot.Self.UserName)
+	utils.InfoLogger.Printf("Authorized on account %s", bot.Self.UserName)
 
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
@@ -51,9 +51,9 @@ func main() {
 		case "support":
 			routes.SupportHandler(bot, update)
 		default:
-			log.Printf("Unknown command: %s", update.Message.Text)
+			utils.InfoLogger.Printf("Unknown command: %s", update.Message.Text)
 		}
 
-		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
+		utils.InfoLogger.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 	}
 }

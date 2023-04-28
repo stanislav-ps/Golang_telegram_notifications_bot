@@ -1,0 +1,62 @@
+INFO: 2023/04/28 20:13:48 main.go:25: Authorized on account stepik_sandbox_bot
+INFO: 2023/04/28 20:13:53 start_handler.go:11: Received /start command
+INFO: 2023/04/28 20:13:54 main.go:57: [StanislavPS123] /start
+INFO: 2023/04/28 20:13:57 main.go:57: [StanislavPS123] /create_notification
+INFO: 2023/04/28 20:14:00 main.go:57: [StanislavPS123] /edit_notification
+INFO: 2023/04/28 20:14:03 delete_notification_handler.go:11: Received /delete_notification command
+INFO: 2023/04/28 20:14:03 main.go:57: [StanislavPS123] /delete_notification
+INFO: 2023/04/28 20:14:08 delete_notification_handler.go:11: Received /delete_notification command
+INFO: 2023/04/28 20:14:08 main.go:57: [StanislavPS123] /delete_notification
+INFO: 2023/04/28 20:14:12 list_handler.go:11: Received /list command
+INFO: 2023/04/28 20:14:12 main.go:57: [StanislavPS123] /list_notification
+INFO: 2023/04/28 20:14:15 help_handler.go:11: Received /help command
+INFO: 2023/04/28 20:14:15 main.go:57: [StanislavPS123] /help
+INFO: 2023/04/28 20:14:18 support_handler.go:11: Received /support command
+INFO: 2023/04/28 20:14:18 main.go:57: [StanislavPS123] /support
+INFO: 2023/04/28 20:39:09 main.go:25: Authorized on account stepik_sandbox_bot
+INFO: 2023/04/28 20:39:17 start_handler.go:11: Received /start command
+INFO: 2023/04/28 20:39:17 main.go:57: [StanislavPS123] /start
+INFO: 2023/04/28 20:42:23 main.go:25: Authorized on account stepik_sandbox_bot
+INFO: 2023/04/28 20:42:27 start_handler.go:11: Received /start command
+INFO: 2023/04/28 20:42:27 main.go:57: [StanislavPS123] /start
+INFO: 2023/04/28 20:42:31 main.go:57: [StanislavPS123] /create_notification
+INFO: 2023/04/28 20:42:34 main.go:57: [StanislavPS123] /edit_notification
+INFO: 2023/04/28 20:42:37 delete_notification_handler.go:11: Received /delete_notification command
+INFO: 2023/04/28 20:42:37 main.go:57: [StanislavPS123] /delete_notification
+INFO: 2023/04/28 20:42:41 delete_notification_handler.go:11: Received /delete_notification command
+INFO: 2023/04/28 20:42:41 main.go:57: [StanislavPS123] /delete_notification
+INFO: 2023/04/28 20:42:44 list_handler.go:11: Received /list command
+INFO: 2023/04/28 20:42:45 main.go:57: [StanislavPS123] /list_notification
+INFO: 2023/04/28 20:42:49 help_handler.go:11: Received /help command
+INFO: 2023/04/28 20:42:49 main.go:57: [StanislavPS123] /help
+INFO: 2023/04/28 20:42:53 support_handler.go:11: Received /support command
+INFO: 2023/04/28 20:42:54 main.go:57: [StanislavPS123] /support
+INFO: 2023/04/28 20:44:02 start_handler.go:11: Received /start command
+INFO: 2023/04/28 20:44:02 main.go:57: [] /start
+INFO: 2023/04/28 20:44:10 list_handler.go:11: Received /list command
+INFO: 2023/04/28 20:44:10 main.go:57: [] /list_notification
+INFO: 2023/04/28 20:44:12 help_handler.go:11: Received /help command
+INFO: 2023/04/28 20:44:12 main.go:57: [] /help
+INFO: 2023/04/28 20:44:15 main.go:57: [] /create_notification
+INFO: 2023/04/28 20:44:19 main.go:57: [] /edit_notification
+INFO: 2023/04/28 20:44:23 support_handler.go:11: Received /support command
+INFO: 2023/04/28 20:44:23 main.go:57: [] /support
+INFO: 2023/04/28 20:44:44 main.go:57: [] /edit_notification
+INFO: 2023/04/28 20:44:47 main.go:54: Unknown command: Раррп
+INFO: 2023/04/28 20:44:47 main.go:57: [] Раррп
+INFO: 2023/04/28 20:44:55 list_handler.go:11: Received /list command
+INFO: 2023/04/28 20:44:55 main.go:57: [] /list_notification
+INFO: 2023/04/28 20:44:58 support_handler.go:11: Received /support command
+INFO: 2023/04/28 20:44:58 main.go:57: [] /support
+INFO: 2023/04/28 20:45:01 help_handler.go:11: Received /help command
+INFO: 2023/04/28 20:45:01 main.go:57: [] /help
+INFO: 2023/04/28 20:45:04 main.go:57: [] /create_notification
+INFO: 2023/04/28 20:45:06 main.go:54: Unknown command: Пллп
+INFO: 2023/04/28 20:45:06 main.go:57: [] Пллп
+INFO: 2023/04/28 20:46:13 main.go:57: [StanislavPS123] /create_notification
+INFO: 2023/04/28 20:47:25 main.go:25: Authorized on account stepik_sandbox_bot
+INFO: 2023/04/28 20:48:58 main.go:25: Authorized on account stepik_sandbox_bot
+INFO: 2023/04/28 20:49:02 start_handler.go:11: Received /start command
+INFO: 2023/04/28 20:49:02 main.go:57: [StanislavPS123] /start
+INFO: 2023/04/28 20:49:06 main.go:57: [StanislavPS123] /create_notification
+INFO: 2023/04/28 20:49:10 main.go:57: [StanislavPS123] /edit_notification

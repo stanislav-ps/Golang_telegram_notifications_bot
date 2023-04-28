@@ -1,13 +1,15 @@
 package routes
 
 import (
-	"log"
+	"obit_bot/utils"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 // StartHandler обрабатывает команду /start
 func StartHandler(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+	utils.InfoLogger.Println("Received /start command")
+
 	// Отправляем пользователю сообщение
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Добрый день! Выберите нужный пункт меню. "+
 		"Доступные команды:\n"+
@@ -19,6 +21,6 @@ func StartHandler(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		"/support - Написать в поддержку")
 	_, err := bot.Send(msg)
 	if err != nil {
-		log.Println(err)
+		utils.ErrorLogger.Println(err)
 	}
 }
