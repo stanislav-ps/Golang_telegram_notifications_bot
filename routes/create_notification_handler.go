@@ -1,58 +1,75 @@
 package routes
 
 import (
-	"strconv"
-
+	"obit_bot/keyboards"
+	"obit_bot/services"
 	"obit_bot/utils"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-// CreateNotificationHandler обрабатывает команду /create_notification
+// CreateNotificationHandler обработчик команды /create_notification
 func CreateNotificationHandler(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	utils.InfoLogger.Println("Received /create_notification command")
-
+	// Запрашиваем у пользователя время и дату уведомления
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Введите время и дату уведомления (например, 13:30 01.05.2023):")
-	bot.Send(msg)
+	if _, err := bot.Send(msg); err != nil {
+		utils.ErrorLogger.Fatal(err)
+	}
 
-	// Получаем ответ пользователя
-	updates, err := bot.GetUpdatesChan(tgbotapi.UpdateConfig{
-		Offset: update.UpdateID + 1,
-	})
-	if err != nil {
-		utils.ErrorLogger.Println(err)
+	updates := bot.GetUpdatesChan(tgbotapi.UpdateConfig{Timeout: 30})
+	responseChan := make(chan tgbotapi.Update, 1)
+	updates = append(updates, responseChan...)
+	response := <-responseChan
+
+	// Запрашиваем у пользователя текст уведомления
+	msg = tgbotapi.NewMessage(update.Message.Chat.ID, "Введите текст уведомления:")
+	if _, err := bot.Send(msg); err != nil {
+		utils.ErrorLogger.Println("Failed to send message:", err)
 		return
 	}
 
-	var dateTime string
-	var frequency int // перемещаем объявление переменной сюда
-	for resp := range updates {
-		if resp.Message == nil || resp.Message.Chat.ID != update.Message.Chat.ID {
-			continue
-		}
-		dateTime = resp.Message.Text
-		break
+	// Ждем ответа от пользователя
+	response = <-responseChan
+
+	// Получаем текст сообщения с уведомлением
+	text := response.Message.Text
+
+	// Показываем пользователю клавиатуру для выбора частоты уведомления
+	msg = tgbotapi.NewMessage(update.Message.Chat.ID, "Выберите частоту уведомления:")
+	msg.ReplyMarkup = keyboards.NotificationKeyboard()
+	if _, err := bot.Send(msg); err != nil {
+		utils.ErrorLogger.Println("Failed to send message:", err)
+		return
 	}
 
-	msg = tgbotapi.NewMessage(update.Message.Chat.ID, "Введите частоту оповещения (в минутах):")
-	bot.Send(msg)
+	// Ждем ответа от пользователя
+	response = <-responseChan
 
-	// Получаем ответ пользователя
-	for resp := range updates {
-		if resp.Message == nil || resp.Message.Chat.ID != update.Message.Chat.ID {
-			continue
-		}
-		var err error // добавляем объявление переменной err
-		frequency, err = strconv.Atoi(resp.Message.Text)
-		if err != nil {
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Некорректное значение частоты оповещения")
-			bot.Send(msg)
-			utils.ErrorLogger.Println(err)
-			return
-		}
-		break
+	// Получаем текст выбранной частоты уведомления
+	frequency := response.Message.Text
+
+	// Создаем структуру уведомления
+	notification := models.Notification{
+		ChatID:    update.Message.Chat.ID,
+		Text:      text,
+		TimeDate:  timeDate,
+		Frequency: frequency,
 	}
 
-	msg = tgbotapi.NewMessage(update.Message.Chat.ID, "Уведомление создано:\nВремя: "+dateTime+"\nЧастота: "+strconv.Itoa(frequency))
-	bot.Send(msg)
+	// Сохраняем уведомление в базе данных
+	if err := notification.Create(services.DB.Conn); err != nil {
+		utils.ErrorLogger.Println("Failed to create notification:", err)
+		return
+	}
+
+	// Отправляем сообщение пользователю, что уведомление создано
+	msg = tgbotapi.NewMessage(update.Message.Chat.ID,
+		"Уведомление создано:\n"+
+			"Текст: "+notification.Text+"\n"+
+			"Частота: "+notification.Frequency+"\n"+
+			"Время: "+notification.Time.String())
+	if _, err := bot.Send(msg); err != nil {
+		utils.ErrorLogger.Println("Failed to send message:", err)
+		return
+	}
 }

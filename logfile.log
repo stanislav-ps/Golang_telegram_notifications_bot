@@ -75,3 +75,17 @@ INFO: 2023/05/02 10:39:40 main.go:25: Authorized on account stepik_sandbox_bot
 INFO: 2023/05/02 10:39:49 start_handler.go:11: Received /start command
 INFO: 2023/05/02 10:39:49 main.go:57: [StanislavPS123] /start
 INFO: 2023/05/02 10:39:52 create_notification_handler.go:13: Received /create_notification command
+INFO: 2023/05/02 11:35:06 main.go:25: Authorized on account stepik_sandbox_bot
+INFO: 2023/05/02 11:35:18 start_handler.go:11: Received /start command
+INFO: 2023/05/02 11:35:18 main.go:57: [StanislavPS123] /start
+INFO: 2023/05/02 11:35:23 create_notification_handler.go:13: Received /create_notification command
+INFO: 2023/05/02 11:35:43 main.go:57: [StanislavPS123] /create_notification
+INFO: 2023/05/02 11:36:23 main.go:25: Authorized on account stepik_sandbox_bot
+INFO: 2023/05/02 11:36:28 start_handler.go:11: Received /start command
+INFO: 2023/05/02 11:36:28 main.go:57: [StanislavPS123] /start
+INFO: 2023/05/02 11:36:31 create_notification_handler.go:14: Received /create_notification command
+INFO: 2023/05/02 11:41:45 main.go:25: Authorized on account stepik_sandbox_bot
+INFO: 2023/05/02 11:41:49 start_handler.go:11: Received /start command
+INFO: 2023/05/02 11:41:49 main.go:57: [StanislavPS123] /start
+INFO: 2023/05/02 11:41:51 create_notification_handler.go:13: Received /create_notification command
+INFO: 2023/05/03 09:40:56 main.go:25: Authorized on account stepik_sandbox_bot
