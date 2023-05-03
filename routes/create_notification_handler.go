@@ -1,12 +1,17 @@
 package routes
 
 import (
+	"time"
+
 	"obit_bot/keyboards"
+	"obit_bot/models"
 	"obit_bot/services"
 	"obit_bot/utils"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
+
+var response tgbotapi.Update
 
 // CreateNotificationHandler обработчик команды /create_notification
 func CreateNotificationHandler(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
@@ -16,10 +21,22 @@ func CreateNotificationHandler(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		utils.ErrorLogger.Fatal(err)
 	}
 
-	updates := bot.GetUpdatesChan(tgbotapi.UpdateConfig{Timeout: 30})
-	responseChan := make(chan tgbotapi.Update, 1)
-	updates = append(updates, responseChan...)
-	response := <-responseChan
+	// Ждем ответа от пользователя
+	response := waitResponse(bot)
+
+	// Получаем текст сообщения с временем и датой уведомления
+	timeDateString := response.Message.Text
+
+	// Парсим время и дату уведомления
+	timeDate, err := time.Parse("15:04 02.01.2006", timeDateString)
+	if err != nil {
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Некорректный формат даты и времени. Попробуйте еще раз.")
+		if _, err := bot.Send(msg); err != nil {
+			utils.ErrorLogger.Println("Failed to send message:", err)
+			return
+		}
+		return
+	}
 
 	// Запрашиваем у пользователя текст уведомления
 	msg = tgbotapi.NewMessage(update.Message.Chat.ID, "Введите текст уведомления:")
@@ -29,7 +46,7 @@ func CreateNotificationHandler(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	}
 
 	// Ждем ответа от пользователя
-	response = <-responseChan
+	response = waitResponse(bot)
 
 	// Получаем текст сообщения с уведомлением
 	text := response.Message.Text
@@ -43,11 +60,21 @@ func CreateNotificationHandler(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	}
 
 	// Ждем ответа от пользователя
-	response = <-responseChan
+	response = waitResponse(bot)
 
 	// Получаем текст выбранной частоты уведомления
-	frequency := response.Message.Text
+	frequencyString := response.Message.Text
 
+	// Парсим выбранную частоту уведомления
+	frequency, err := parseFrequency(frequencyString)
+	if err != nil {
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Некорректная частота уведомления. Попробуйте еще раз.")
+		if _, err := bot.Send(msg); err != nil {
+			utils.ErrorLogger.Println("Failed to send message:", err)
+			return
+		}
+		return
+	}
 	// Создаем структуру уведомления
 	notification := models.Notification{
 		ChatID:    update.Message.Chat.ID,
@@ -67,7 +94,7 @@ func CreateNotificationHandler(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		"Уведомление создано:\n"+
 			"Текст: "+notification.Text+"\n"+
 			"Частота: "+notification.Frequency+"\n"+
-			"Время: "+notification.Time.String())
+			"Время: "+notification.TimeDate.String())
 	if _, err := bot.Send(msg); err != nil {
 		utils.ErrorLogger.Println("Failed to send message:", err)
 		return
